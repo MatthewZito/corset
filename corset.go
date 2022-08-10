@@ -232,9 +232,8 @@ func (c *Corset) Handler(h http.Handler) http.Handler {
 			}
 		} else {
 			c.handleRequest(w, r)
+			h.ServeHTTP(w, r)
 		}
-
-		h.ServeHTTP(w, r)
 	})
 }
 
