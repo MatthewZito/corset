@@ -83,12 +83,14 @@ func NewCorset(opts CorsetOptions) *Corset {
 			if origin == "*" {
 				c.allowAllOrigins = true
 				break
-			} else {
-				// Append "null" to allow list to support testing / requests from files, redirects, etc.
-				// Note: Used for redirects because the browser should not expose the origin of the new server; redirects are followed automatically.
-				c.allowedOrigins = append(c.allowedOrigins, origin, "null")
 			}
+
+			c.allowedOrigins = append(c.allowedOrigins, origin)
 		}
+
+		// Append "null" to allow list to support testing / requests from files, redirects, etc.
+		// Note: Used for redirects because the browser should not expose the origin of the new server; redirects are followed automatically.
+		c.allowedOrigins = append(c.allowedOrigins, "null")
 	}
 
 	// Register headers: if no given headers, default to those allowed per the spec.

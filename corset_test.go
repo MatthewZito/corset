@@ -511,6 +511,10 @@ func TestIsOriginAllowed(t *testing.T) {
 					testOrigin: "http://baz.com",
 					isAllowed:  false,
 				},
+				{
+					testOrigin: "null", // file redirect
+					isAllowed:  true,
+				},
 			},
 		},
 		{
