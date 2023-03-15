@@ -5,7 +5,7 @@ import (
 	"unicode"
 )
 
-// isPreflightRequest determines whether the given request is a Preflight.
+// isPreflightRequest determines whether the given request is a Preflight
 // A Preflight must:
 // 1) use the OPTIONS method
 // 2) include an Origin request header
@@ -17,7 +17,8 @@ func isPreflightRequest(r *http.Request) bool {
 	return isOptionsReq && hasOriginHeader && hasRequestMethod
 }
 
-// deriveHeaders extracts headers from a given request.
+// deriveHeaders extracts the headers in the value of the
+// `Access-Control-Request-Headers` header
 // @todo optimize
 func deriveHeaders(r *http.Request) []string {
 	headersStr := r.Header.Get(requestHeadersHeader)

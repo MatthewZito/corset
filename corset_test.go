@@ -299,18 +299,18 @@ func TestCorsMiddleWare(t *testing.T) {
 		t.Run(test.name, func(t *testing.T) {
 			corset := NewCorset(test.options)
 
-			// Build mock request.
+			// Build mock request
 			req, _ := http.NewRequest(test.method, "whatever", nil)
-			// Add headers to request.
+			// Add headers to request
 			for key, value := range test.reqHeaders {
 				req.Header.Add(key, value)
 			}
 
-			// Run CORS handler.
+			// Run CORS handler
 			rec := httptest.NewRecorder()
 			corset.Handler(mockHandler).ServeHTTP(rec, req)
 
-			// Evaluate resulting headers.
+			// Evaluate resulting headers
 			checkHeaders(t, rec.Header(), test.resHeaders)
 			checkStatusCode(t, rec, test.code)
 		})
