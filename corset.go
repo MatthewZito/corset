@@ -108,6 +108,7 @@ func NewCorset(opts CorsetOptions) *Corset {
 
 			c.allowedHeaders = append(c.allowedHeaders, http.CanonicalHeaderKey(header))
 		}
+		c.allowedHeaders = append(c.allowedHeaders, originHeader)
 	}
 
 	if len(opts.AllowedMethods) == 0 {
@@ -234,6 +235,7 @@ func (c *Corset) Handler(h http.Handler) http.Handler {
 			}
 		} else {
 			c.handleRequest(w, r)
+
 			h.ServeHTTP(w, r)
 		}
 	})

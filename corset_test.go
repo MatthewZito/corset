@@ -154,7 +154,7 @@ func TestCorsMiddleWare(t *testing.T) {
 			resHeaders: map[string]string{
 				varyHeader:         "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
 				allowOriginsHeader: "*",
-				allowHeadersHeader: "X-Testing",
+				allowHeadersHeader: "X-Testing, Origin",
 				allowMethodsHeader: http.MethodGet,
 			},
 			code: http.StatusNoContent,
@@ -174,7 +174,7 @@ func TestCorsMiddleWare(t *testing.T) {
 			resHeaders: map[string]string{
 				varyHeader:         "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
 				allowOriginsHeader: "*",
-				allowHeadersHeader: "X-Testing, X-Testing-2, X-Testing-3",
+				allowHeadersHeader: "X-Testing, X-Testing-2, X-Testing-3, Origin",
 				allowMethodsHeader: http.MethodGet,
 			},
 			code: http.StatusNoContent,
@@ -567,6 +567,7 @@ func TestIsOriginAllowed(t *testing.T) {
 func checkHeaders(t *testing.T, resHeaders http.Header, expHeaders map[string]string) {
 	for _, name := range allHeaders {
 		expected := expHeaders[name]
+
 		actual := strings.Join(resHeaders[name], ", ")
 
 		if expected != actual {

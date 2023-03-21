@@ -29,7 +29,6 @@ func deriveHeaders(r *http.Request) []string {
 	}
 
 	length := len(headersStr)
-
 	var tmp []rune
 
 	for i, char := range headersStr {
